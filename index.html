@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -150,6 +151,28 @@
       animation: blink-cursor .72s step-end infinite;
     }
 
+    .site-footer {
+      display: none;
+      margin-top: clamp(5rem, 12vh, 9rem);
+      padding: 2rem 0 1.5rem;
+      border-top: 1px solid #171a18;
+      color: #898d89;
+      font-size: .82rem;
+      letter-spacing: .04em;
+    }
+
+    .site-footer.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 2rem;
+    }
+
+    .footer-status { display: flex; gap: .75rem; }
+    .footer-separator { color: #4b4f4b; }
+    .footer-home { color: inherit; text-decoration: none; }
+    .footer-home:hover { color: var(--text); }
+
     @media (prefers-reduced-motion: reduce) {
       .brand-text {
         width: auto;
@@ -161,6 +184,7 @@
     @media (max-width: 640px) {
       body { font-size: 15px; }
       .site { width: min(calc(100% - 2rem), 38rem); padding-top: 2.5rem; }
+      .site-footer.is-visible { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
@@ -230,6 +254,14 @@
       <p class="output-line" data-output-line>[fin de manifiesto]</p>
       <p id="terminal-return" class="terminal-return" aria-label="Terminal lista">$</p>
     </section>
+    <footer id="site-footer" class="site-footer" aria-hidden="true">
+      <span>© 2026 <a class="footer-home" href="/">DISIDENTE</a>.</span>
+      <span class="footer-status" aria-label="Información legal">
+        <span>Transparencia</span>
+        <span class="footer-separator" aria-hidden="true">|</span>
+        <span>Privacidad</span>
+      </span>
+    </footer>
   </main>
   <script>
     const brand = document.querySelector("#terminal-trigger");
@@ -239,6 +271,7 @@
     const manifesto = document.querySelector("#manifesto");
     const outputLines = [...manifesto.querySelectorAll("[data-output-line]")];
     const terminalReturn = document.querySelector("#terminal-return");
+    const siteFooter = document.querySelector("#site-footer");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let terminalReady = reducedMotion.matches;
     let commandRevealed = false;
@@ -310,6 +343,8 @@
       const finishManifesto = () => {
         manifesto.classList.replace("is-running", "is-complete");
         terminalReturn.classList.add("is-complete");
+        siteFooter.setAttribute("aria-hidden", "false");
+        siteFooter.classList.add("is-visible");
       };
 
       if (reducedMotion.matches) {
