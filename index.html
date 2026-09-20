@@ -42,7 +42,7 @@
       width: min(calc(100% - 5rem), 72rem);
       min-height: 100vh;
       margin: 0 auto;
-      padding: 4.8rem 0 3rem;
+      padding: 4.8rem 0 1.5rem;
     }
 
     .brand {
@@ -116,14 +116,14 @@
 
     .terminal-prompt { color: var(--muted); }
 
-    .manifesto {
+    .introduction {
       width: min(100%, 72ch);
       margin-top: 1.5rem;
       visibility: hidden;
     }
 
-    .manifesto.is-running,
-    .manifesto.is-complete { visibility: visible; }
+    .introduction.is-running,
+    .introduction.is-complete { visibility: visible; }
 
     .output-line {
       display: none;
@@ -153,8 +153,8 @@
 
     .site-footer {
       display: none;
-      margin-top: clamp(5rem, 12vh, 9rem);
-      padding: 2rem 0 1.5rem;
+      margin-top: auto;
+      padding: 2rem 0 .75rem;
       border-top: 1px solid #171a18;
       color: #898d89;
       font-size: .82rem;
@@ -171,7 +171,9 @@
     .footer-status { display: flex; gap: .75rem; }
     .footer-separator { color: #4b4f4b; }
     .footer-home { color: inherit; text-decoration: none; }
-    .footer-home:hover { color: var(--text); }
+    .footer-link { color: inherit; text-decoration: none; }
+    .footer-home:hover,
+    .footer-link:hover { color: var(--text); }
 
     @media (prefers-reduced-motion: reduce) {
       .brand-text {
@@ -207,56 +209,31 @@
         aria-label="Comando de terminal"
         aria-hidden="true"
         aria-live="polite"
-      ><span class="terminal-prompt" data-terminal-text="$ "></span><span data-terminal-text="cat manifiesto.txt"></span></div>
+      ><span class="terminal-prompt" data-terminal-text="$ "></span><span data-terminal-text="cat introduccion.txt"></span></div>
     </header>
-    <section id="manifesto" class="manifesto" aria-label="Manifiesto" aria-hidden="true" aria-live="polite">
-      <p class="output-line" data-output-line>MANIFIESTO</p>
+    <section id="introduccion" class="introduction" aria-label="Introducción" aria-hidden="true" aria-live="polite">
+      <p class="output-line" data-output-line>¿En qué momento nos volvimos complacientes ante tanta corrupción?</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>DISIDENTE nace de una convicción sencilla:</p>
-      <p class="output-line" data-output-line>nada debe quedar fuera de duda.</p>
+      <p class="output-line" data-output-line>¿Cuándo dejamos de exigir cuentas</p>
+      <p class="output-line" data-output-line>a quienes administran nuestro dinero,</p>
+      <p class="output-line" data-output-line>nuestras instituciones y nuestro futuro?</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Cuestionamos al poder, pero también a quienes dicen combatirlo.</p>
-      <p class="output-line" data-output-line>Cuestionamos las ideas dominantes, las verdades cómodas</p>
-      <p class="output-line" data-output-line>y nuestras propias certezas.</p>
+      <p class="output-line" data-output-line>DISIDENTE nace para volver a hacer las preguntas</p>
+      <p class="output-line" data-output-line>que la costumbre, el miedo y la conveniencia</p>
+      <p class="output-line" data-output-line>han silenciado.</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
       <p class="output-line" data-output-line>No estamos aquí para decirte qué pensar.</p>
-      <p class="output-line" data-output-line>Estamos aquí para hacer las preguntas</p>
-      <p class="output-line" data-output-line>que otros prefieren evitar.</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Defendemos la libertad individual,</p>
-      <p class="output-line" data-output-line>la responsabilidad personal</p>
-      <p class="output-line" data-output-line>y el derecho a disentir sin pedir permiso.</p>
+      <p class="output-line" data-output-line>Estamos aquí para recordar que nada está fuera de duda.</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Nuestra independencia no será solamente editorial.</p>
-      <p class="output-line" data-output-line>No aceptaremos financiación gubernamental</p>
-      <p class="output-line" data-output-line>ni subordinaremos nuestras conclusiones</p>
-      <p class="output-line" data-output-line>a partidos, empresas, movimientos o patrocinadores.</p>
-      <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Nos sostendremos mediante nuestros lectores,</p>
-      <p class="output-line" data-output-line>nuestro trabajo y proyectos propios.</p>
-      <p class="output-line" data-output-line>Porque quien paga las preguntas</p>
-      <p class="output-line" data-output-line>puede terminar condicionando las respuestas.</p>
-      <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Publicaremos lo que podamos demostrar.</p>
-      <p class="output-line" data-output-line>Separaremos los hechos de la opinión.</p>
-      <p class="output-line" data-output-line>Reconoceremos nuestros errores</p>
-      <p class="output-line" data-output-line>y los corregiremos de forma visible.</p>
-      <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>No prometemos neutralidad.</p>
-      <p class="output-line" data-output-line>Prometemos honestidad, rigor</p>
-      <p class="output-line" data-output-line>e independencia frente al poder.</p>
-      <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>No buscamos que estés de acuerdo.</p>
-      <p class="output-line" data-output-line>Buscamos que cuestiones.</p>
-      <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Incluso esto.</p>
-      <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>[fin de manifiesto]</p>
+      <p class="output-line" data-output-line>[fin de introducción]</p>
       <p id="terminal-return" class="terminal-return" aria-label="Terminal lista">$</p>
     </section>
     <footer id="site-footer" class="site-footer" aria-hidden="true">
       <span>© 2026 <a class="footer-home" href="/">DISIDENTE</a>.</span>
-      <span class="footer-status" aria-label="Información legal">
+      <span class="footer-status" aria-label="Información del sitio">
+        <a class="footer-link" href="./principios/">Principios</a>
+        <span class="footer-separator" aria-hidden="true">|</span>
         <span>Transparencia</span>
         <span class="footer-separator" aria-hidden="true">|</span>
         <span>Privacidad</span>
@@ -268,14 +245,14 @@
     const brandText = brand.querySelector(".brand-text");
     const commandLine = document.querySelector("#terminal-pages");
     const commandSegments = [...commandLine.querySelectorAll("[data-terminal-text]")];
-    const manifesto = document.querySelector("#manifesto");
-    const outputLines = [...manifesto.querySelectorAll("[data-output-line]")];
+    const introduction = document.querySelector("#introduccion");
+    const outputLines = [...introduction.querySelectorAll("[data-output-line]")];
     const terminalReturn = document.querySelector("#terminal-return");
     const siteFooter = document.querySelector("#site-footer");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let terminalReady = reducedMotion.matches;
     let commandRevealed = false;
-    let manifestoRevealed = false;
+    let introductionRevealed = false;
 
     const armTerminal = () => {
       terminalReady = true;
@@ -331,17 +308,17 @@
       typeNextCharacter();
     };
 
-    const revealManifesto = () => {
-      if (!commandLine.classList.contains("is-complete") || manifestoRevealed) return;
+    const revealIntroduction = () => {
+      if (!commandLine.classList.contains("is-complete") || introductionRevealed) return;
 
-      manifestoRevealed = true;
+      introductionRevealed = true;
       commandLine.classList.remove("awaiting-input");
       commandLine.classList.add("has-run");
-      manifesto.setAttribute("aria-hidden", "false");
-      manifesto.classList.add("is-running");
+      introduction.setAttribute("aria-hidden", "false");
+      introduction.classList.add("is-running");
 
-      const finishManifesto = () => {
-        manifesto.classList.replace("is-running", "is-complete");
+      const finishIntroduction = () => {
+        introduction.classList.replace("is-running", "is-complete");
         terminalReturn.classList.add("is-complete");
         siteFooter.setAttribute("aria-hidden", "false");
         siteFooter.classList.add("is-visible");
@@ -349,7 +326,7 @@
 
       if (reducedMotion.matches) {
         outputLines.forEach((line) => line.classList.add("is-visible"));
-        finishManifesto();
+        finishIntroduction();
         return;
       }
 
@@ -357,7 +334,7 @@
       const printNextLine = () => {
         const line = outputLines[lineIndex];
         if (!line) {
-          finishManifesto();
+          finishIntroduction();
           return;
         }
 
@@ -370,7 +347,7 @@
     };
 
     brand.addEventListener("click", revealCommand);
-    commandLine.addEventListener("click", revealManifesto);
+    commandLine.addEventListener("click", revealIntroduction);
 
     document.addEventListener("keydown", (event) => {
       if ((event.ctrlKey || event.metaKey) && ["+", "=", "-", "0"].includes(event.key)) {
@@ -382,9 +359,9 @@
         if (!commandRevealed) {
           event.preventDefault();
           revealCommand();
-        } else if (!manifestoRevealed && commandLine.classList.contains("is-complete")) {
+        } else if (!introductionRevealed && commandLine.classList.contains("is-complete")) {
           event.preventDefault();
-          revealManifesto();
+          revealIntroduction();
         }
       }
     });
