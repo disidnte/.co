@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="description" content="Los principios editoriales de DISIDENTE.">
+  <meta name="theme-color" content="#050505">
+  <title>Principios — DISIDENTE</title>
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #050505;
+      --text: #ededed;
+      --muted: #898d89;
+      --quiet: #4b4f4b;
+      --line: #171a18;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+
+    .site {
+      display: flex;
+      flex-direction: column;
+      width: min(calc(100% - 5rem), 72rem);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 4.8rem 0 1.5rem;
+    }
+
+    .principles {
+      width: min(100%, 76ch);
+    }
+
+    .principles h1 {
+      margin: 0 0 2.25rem;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 3ch 1fr;
+      gap: 0 1.25rem;
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .principle:last-child { border-bottom: 1px solid var(--line); }
+
+    .number { color: var(--quiet); }
+
+    .principle h2 {
+      margin: 0 0 .45rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .principle p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .terminal-return {
+      margin: 2rem 0 0;
+      color: var(--quiet);
+    }
+
+    .terminal-return::after {
+      display: inline-block;
+      height: 1em;
+      margin-left: .08em;
+      border-right: 2px solid var(--white);
+      vertical-align: -.14em;
+      content: "";
+      animation: blink-cursor .72s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: var(--white); }
+    }
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 2rem;
+      margin-top: 5rem;
+      padding: 2rem 0 .75rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+      letter-spacing: .04em;
+    }
+
+    .footer-status { display: flex; gap: .75rem; }
+    .footer-separator { color: var(--quiet); }
+    .footer-link { color: inherit; text-decoration: none; }
+    .footer-link:hover { color: var(--text); }
+    .current { color: var(--text); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .terminal-return::after { animation: none; border-color: var(--white); }
+    }
+
+    @media (max-width: 640px) {
+      body { font-size: 15px; }
+      .site { width: min(calc(100% - 2rem), 38rem); padding-top: 2.5rem; }
+      .principle { grid-template-columns: 1fr; gap: .5rem; }
+      .site-footer { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <section class="principles" aria-labelledby="principios-title">
+      <h1 id="principios-title">PRINCIPIOS</h1>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">01</span>
+        <div>
+          <h2>Cuestionar todo poder.</h2>
+          <p>Gobiernos, partidos, empresas, movimientos, medios y también a nosotros mismos. Ninguna afinidad concede inmunidad.</p>
+        </div>
+      </article>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">02</span>
+        <div>
+          <h2>Los hechos antes que el bando.</h2>
+          <p>Publicaremos una investigación únicamente cuando su información haya sido corroborada. Separaremos con claridad los hechos, el análisis y la opinión.</p>
+        </div>
+      </article>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">03</span>
+        <div>
+          <h2>Independencia demostrable.</h2>
+          <p>No aceptaremos financiamiento gubernamental. Haremos visibles nuestras fuentes de ingreso y cualquier posible conflicto de interés.</p>
+        </div>
+      </article>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">04</span>
+        <div>
+          <h2>Libertad individual y responsabilidad.</h2>
+          <p>Defendemos el derecho a trabajar, emprender, crear y disfrutar el fruto legítimo del propio esfuerzo, junto con la obligación de responder por nuestros actos.</p>
+        </div>
+      </article>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">05</span>
+        <div>
+          <h2>Un gobierno limitado, eficiente y auditable.</h2>
+          <p>Todo impuesto, regulación, programa e institución debe justificar su existencia, su costo y sus resultados ante los ciudadanos.</p>
+        </div>
+      </article>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">06</span>
+        <div>
+          <h2>Ningún privilegio.</h2>
+          <p>Cuestionamos la corrupción, la burocracia sin resultados, los monopolios protegidos y los abusos privados sostenidos por la cercanía con el poder.</p>
+        </div>
+      </article>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">07</span>
+        <div>
+          <h2>Corregir también es rendir cuentas.</h2>
+          <p>Reconoceremos nuestros errores y los corregiremos de forma visible, explicando qué cambió y por qué.</p>
+        </div>
+      </article>
+
+      <article class="principle">
+        <span class="number" aria-hidden="true">08</span>
+        <div>
+          <h2>El lector decide.</h2>
+          <p>No estamos aquí para decirte qué pensar. Presentaremos evidencia y argumentos para que puedas formar tu propio criterio.</p>
+        </div>
+      </article>
+
+      <p class="terminal-return" aria-label="Terminal lista">$</p>
+    </section>
+
+    <footer class="site-footer">
+      <span>© 2026 <a class="footer-link" href="../">DISIDENTE</a>.</span>
+      <span class="footer-status" aria-label="Información del sitio">
+        <span class="current" aria-current="page">Principios</span>
+        <span class="footer-separator" aria-hidden="true">|</span>
+        <span>Transparencia</span>
+        <span class="footer-separator" aria-hidden="true">|</span>
+        <span>Privacidad</span>
+      </span>
+    </footer>
+  </main>
+
+  <script>
+    document.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && ["+", "=", "-", "0"].includes(event.key)) event.preventDefault();
+    });
+
+    window.addEventListener("wheel", (event) => {
+      if (event.ctrlKey || event.metaKey) event.preventDefault();
+    }, { passive: false });
+
+    ["gesturestart", "gesturechange", "gestureend"].forEach((gesture) => {
+      document.addEventListener(gesture, (event) => event.preventDefault(), { passive: false });
+    });
+  </script>
+</body>
+</html>
