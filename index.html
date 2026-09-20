@@ -48,7 +48,10 @@
       margin: 0;
       font-size: 1rem;
       font-weight: 700;
+      cursor: default;
     }
+
+    .brand.awaiting-input { cursor: pointer; }
 
     .brand::before { content: "> "; color: var(--white); }
 
@@ -64,6 +67,12 @@
         blink-cursor .72s step-end infinite;
     }
 
+    .brand.has-submitted .brand-text {
+      width: 9ch;
+      border-right-color: transparent;
+      animation: none;
+    }
+
     @keyframes type-brand {
       from { width: 0; }
       to { width: 9ch; }
@@ -74,68 +83,71 @@
       50% { border-color: var(--white); }
     }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
+    .terminal-line {
       margin-top: .75rem;
+      color: var(--white);
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .terminal-line.is-printing,
+    .terminal-line.is-complete {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .terminal-line.is-complete { pointer-events: auto; }
+
+    .terminal-line.awaiting-input { cursor: pointer; }
+
+    .terminal-line.is-complete::after {
+      display: inline-block;
+      height: 1em;
+      margin-left: .08em;
+      border-right: 2px solid var(--white);
+      vertical-align: -.14em;
+      content: "";
+      animation: blink-cursor .72s step-end infinite;
+    }
+
+    .terminal-line.is-complete.has-run::after { display: none; }
+
+    .terminal-prompt { color: var(--muted); }
+
+    .manifesto {
+      width: min(100%, 72ch);
+      margin-top: 1.5rem;
+      visibility: hidden;
+    }
+
+    .manifesto.is-running,
+    .manifesto.is-complete { visibility: visible; }
+
+    .output-line {
+      display: none;
+      margin: 0;
+    }
+
+    .output-line.is-visible { display: block; }
+    .output-line.gap { min-height: 1.35em; }
+
+    .terminal-return {
+      display: none;
+      margin-top: 1.35rem;
       color: var(--muted);
     }
 
-    nav a {
-      color: var(--white);
-      text-decoration: none;
-    }
+    .terminal-return.is-complete { display: block; }
 
-    .statement {
-      margin-top: clamp(4rem, 9vh, 6.5rem);
-      max-width: 58rem;
-      font-size: clamp(1.15rem, 2vw, 1.65rem);
-      line-height: 1.45;
-    }
-
-    .statement p { margin: 0; }
-    .statement .prompt,
-    .statement-meta { color: var(--muted); }
-    .statement .statement-meta {
-      margin-top: .9rem;
-      font-size: 1rem;
-    }
-
-    .archive { margin-top: clamp(4rem, 8vh, 6rem); }
-
-    .post {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 12rem;
-      gap: 3rem;
-      padding: .22rem 0;
-      color: var(--white);
-      font-size: clamp(1rem, 1.3vw, 1.08rem);
-      line-height: 1.55;
-      text-decoration: none;
-    }
-
-    .date { text-align: right; }
-
-    .pagination {
-      margin-top: 2rem;
-      color: var(--muted);
-    }
-
-    .pagination p { margin: .25rem 0; }
-
-    footer {
-      margin-top: auto;
-      padding-top: clamp(5rem, 14vh, 9rem);
-      color: var(--muted);
-    }
-
-    footer p { margin: .25rem 0; }
-    .footer-meta { font-size: .88rem; }
-
-    footer a {
-      color: var(--white);
-      text-decoration: none;
+    .terminal-return.is-complete::after {
+      display: inline-block;
+      height: 1em;
+      margin-left: .08em;
+      border-right: 2px solid var(--white);
+      vertical-align: -.14em;
+      content: "";
+      animation: blink-cursor .72s step-end infinite;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -149,57 +161,196 @@
     @media (max-width: 640px) {
       body { font-size: 15px; }
       .site { width: min(calc(100% - 2rem), 38rem); padding-top: 2.5rem; }
-      .statement { margin-top: 4rem; font-size: 1.05rem; }
-      .archive { margin-top: 3.5rem; }
-      .post { grid-template-columns: 1fr; gap: 0; padding: .55rem 0; }
-      .date { color: var(--muted); text-align: left; font-size: .82rem; }
-      footer { padding-top: 6rem; }
     }
   </style>
 </head>
 <body>
   <main class="site">
     <header>
-      <p class="brand"><span class="brand-text">DISIDENTE</span></p>
-      <nav aria-label="Navegación principal">
-        <span>$pages = [</span>
-        <a href="/">Editorial</a>
-        <a href="#archivo">Archivo</a>
-        <a href="#principios">Principios</a>
-        <a href="#acerca">Acerca</a>
-        <span>];</span>
-      </nav>
+      <p
+        id="terminal-trigger"
+        class="brand"
+        tabindex="0"
+        role="button"
+        aria-controls="terminal-pages"
+        aria-expanded="false"
+        aria-label="DISIDENTE. Presiona Enter para escribir el comando."
+      ><span class="brand-text">DISIDENTE</span></p>
+      <div
+        id="terminal-pages"
+        class="terminal-line"
+        role="status"
+        aria-label="Comando de terminal"
+        aria-hidden="true"
+        aria-live="polite"
+      ><span class="terminal-prompt" data-terminal-text="$ "></span><span data-terminal-text="cat manifiesto.txt"></span></div>
     </header>
-
-    <section id="principios" class="statement" aria-label="Principio editorial">
-      <p><span class="prompt">$principio = </span>"Cuestionar todo. Incluso a nosotros mismos.";</p>
-      <p class="statement-meta">$financiacion_gubernamental = false;</p>
+    <section id="manifesto" class="manifesto" aria-label="Manifiesto" aria-hidden="true" aria-live="polite">
+      <p class="output-line" data-output-line>MANIFIESTO</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>DISIDENTE nace de una convicción sencilla:</p>
+      <p class="output-line" data-output-line>nada debe quedar fuera de duda.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Cuestionamos al poder, pero también a quienes dicen combatirlo.</p>
+      <p class="output-line" data-output-line>Cuestionamos las ideas dominantes, las verdades cómodas</p>
+      <p class="output-line" data-output-line>y nuestras propias certezas.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>No estamos aquí para decirte qué pensar.</p>
+      <p class="output-line" data-output-line>Estamos aquí para hacer las preguntas</p>
+      <p class="output-line" data-output-line>que otros prefieren evitar.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Defendemos la libertad individual,</p>
+      <p class="output-line" data-output-line>la responsabilidad personal</p>
+      <p class="output-line" data-output-line>y el derecho a disentir sin pedir permiso.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Nuestra independencia no será solamente editorial.</p>
+      <p class="output-line" data-output-line>No aceptaremos financiación gubernamental</p>
+      <p class="output-line" data-output-line>ni subordinaremos nuestras conclusiones</p>
+      <p class="output-line" data-output-line>a partidos, empresas, movimientos o patrocinadores.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Nos sostendremos mediante nuestros lectores,</p>
+      <p class="output-line" data-output-line>nuestro trabajo y proyectos propios.</p>
+      <p class="output-line" data-output-line>Porque quien paga las preguntas</p>
+      <p class="output-line" data-output-line>puede terminar condicionando las respuestas.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Publicaremos lo que podamos demostrar.</p>
+      <p class="output-line" data-output-line>Separaremos los hechos de la opinión.</p>
+      <p class="output-line" data-output-line>Reconoceremos nuestros errores</p>
+      <p class="output-line" data-output-line>y los corregiremos de forma visible.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>No prometemos neutralidad.</p>
+      <p class="output-line" data-output-line>Prometemos honestidad, rigor</p>
+      <p class="output-line" data-output-line>e independencia frente al poder.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>No buscamos que estés de acuerdo.</p>
+      <p class="output-line" data-output-line>Buscamos que cuestiones.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Incluso esto.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>[fin de manifiesto]</p>
+      <p id="terminal-return" class="terminal-return" aria-label="Terminal lista">$</p>
     </section>
-
-    <section id="archivo" class="archive" aria-label="Publicaciones">
-      <a class="post" href="#"><span class="title">La pregunta que incomoda a nuestro propio bando</span><time class="date">26.09.19 03:30</time></a>
-      <a class="post" href="#"><span class="title">¿Quién vigila a quienes dicen vigilar el poder?</span><time class="date">26.09.18 22:14</time></a>
-      <a class="post" href="#"><span class="title">La obediencia también tiene incentivos</span><time class="date">26.09.17 19:08</time></a>
-      <a class="post" href="#"><span class="title">Corregir no es perder autoridad</span><time class="date">26.09.16 12:41</time></a>
-      <a class="post" href="#"><span class="title">La libertad que solamente defendemos cuando conviene</span><time class="date">26.09.15 08:03</time></a>
-      <a class="post" href="#"><span class="title">El precio invisible de pedir permiso</span><time class="date">26.09.14 07:46</time></a>
-      <a class="post" href="#"><span class="title">Nada está fuera de duda</span><time class="date">26.09.13 02:23</time></a>
-
-      <div class="pagination" aria-label="Paginación">
-        <p>$previous = ;</p>
-        <p>$next = ;</p>
-      </div>
-    </section>
-
-    <footer id="acerca">
-      <p><span>independencia_editorial( </span><a href="/">"DISIDENTE"</a><span> );</span></p>
-      <p class="footer-meta">disidente.co / DISIDENTE GROUP</p>
-    </footer>
   </main>
   <script>
+    const brand = document.querySelector("#terminal-trigger");
+    const brandText = brand.querySelector(".brand-text");
+    const commandLine = document.querySelector("#terminal-pages");
+    const commandSegments = [...commandLine.querySelectorAll("[data-terminal-text]")];
+    const manifesto = document.querySelector("#manifesto");
+    const outputLines = [...manifesto.querySelectorAll("[data-output-line]")];
+    const terminalReturn = document.querySelector("#terminal-return");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let terminalReady = reducedMotion.matches;
+    let commandRevealed = false;
+    let manifestoRevealed = false;
+
+    const armTerminal = () => {
+      terminalReady = true;
+      brand.classList.add("awaiting-input");
+    };
+
+    if (terminalReady) {
+      armTerminal();
+    } else {
+      brandText.addEventListener("animationend", (event) => {
+        if (event.animationName === "type-brand") armTerminal();
+      }, { once: true });
+      window.setTimeout(armTerminal, 1600);
+    }
+
+    const revealCommand = () => {
+      if (!terminalReady || commandRevealed) return;
+
+      commandRevealed = true;
+      brand.classList.remove("awaiting-input");
+      brand.classList.add("has-submitted");
+      brand.setAttribute("aria-expanded", "true");
+      commandLine.setAttribute("aria-hidden", "false");
+      commandLine.classList.add("is-printing");
+
+      if (reducedMotion.matches) {
+        commandSegments.forEach((segment) => {
+          segment.textContent = segment.dataset.terminalText;
+        });
+        commandLine.classList.replace("is-printing", "is-complete");
+        commandLine.classList.add("awaiting-input");
+        return;
+      }
+
+      const queue = commandSegments.flatMap((segment) =>
+        [...segment.dataset.terminalText].map((character) => ({ segment, character }))
+      );
+      let characterIndex = 0;
+
+      const typeNextCharacter = () => {
+        const entry = queue[characterIndex];
+        if (!entry) {
+          commandLine.classList.replace("is-printing", "is-complete");
+          commandLine.classList.add("awaiting-input");
+          return;
+        }
+
+        entry.segment.textContent += entry.character;
+        characterIndex += 1;
+        window.setTimeout(typeNextCharacter, 24);
+      };
+
+      typeNextCharacter();
+    };
+
+    const revealManifesto = () => {
+      if (!commandLine.classList.contains("is-complete") || manifestoRevealed) return;
+
+      manifestoRevealed = true;
+      commandLine.classList.remove("awaiting-input");
+      commandLine.classList.add("has-run");
+      manifesto.setAttribute("aria-hidden", "false");
+      manifesto.classList.add("is-running");
+
+      const finishManifesto = () => {
+        manifesto.classList.replace("is-running", "is-complete");
+        terminalReturn.classList.add("is-complete");
+      };
+
+      if (reducedMotion.matches) {
+        outputLines.forEach((line) => line.classList.add("is-visible"));
+        finishManifesto();
+        return;
+      }
+
+      let lineIndex = 0;
+      const printNextLine = () => {
+        const line = outputLines[lineIndex];
+        if (!line) {
+          finishManifesto();
+          return;
+        }
+
+        line.classList.add("is-visible");
+        lineIndex += 1;
+        window.setTimeout(printNextLine, 72);
+      };
+
+      printNextLine();
+    };
+
+    brand.addEventListener("click", revealCommand);
+    commandLine.addEventListener("click", revealManifesto);
+
     document.addEventListener("keydown", (event) => {
       if ((event.ctrlKey || event.metaKey) && ["+", "=", "-", "0"].includes(event.key)) {
         event.preventDefault();
+        return;
+      }
+
+      if (event.key === "Enter" && terminalReady) {
+        if (!commandRevealed) {
+          event.preventDefault();
+          revealCommand();
+        } else if (!manifestoRevealed && commandLine.classList.contains("is-complete")) {
+          event.preventDefault();
+          revealManifesto();
+        }
       }
     });
 
