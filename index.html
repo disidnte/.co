@@ -53,6 +53,27 @@
     a { color: inherit; }
     a:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
 
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .site-social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.65rem;
+      height: 1.65rem;
+      opacity: .62;
+      text-decoration: none;
+      transition: opacity 140ms ease;
+    }
+
+    .site-social:hover { opacity: 1; }
+    .site-social img { display: block; width: 1.05rem; height: 1.05rem; }
+
     .site {
       display: flex;
       flex-direction: column;
@@ -185,7 +206,7 @@
       gap: 1rem 2rem;
     }
 
-    .footer-status { display: flex; gap: .75rem; }
+    .footer-status { display: flex; align-items: center; gap: .75rem; }
     .footer-separator { color: #4b4f4b; }
     .footer-home { color: inherit; text-decoration: none; }
     .footer-link { color: inherit; text-decoration: none; }
@@ -210,15 +231,25 @@
 <body>
   <main class="site">
     <header>
-      <p
-        id="terminal-trigger"
-        class="brand"
-        tabindex="0"
-        role="button"
-        aria-controls="terminal-pages"
-        aria-expanded="false"
-        aria-label="DISIDENTE. Presiona Enter para escribir el comando."
-      ><span class="brand-text">DISIDENTE</span></p>
+      <div class="header-bar">
+        <p
+          id="terminal-trigger"
+          class="brand"
+          tabindex="0"
+          role="button"
+          aria-controls="terminal-pages"
+          aria-expanded="false"
+          aria-label="DISIDENTE. Presiona Enter para escribir el comando."
+        ><span class="brand-text">DISIDENTE</span></p>
+        <a
+          class="site-social"
+          href="https://x.com/disidente"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="DISIDENTE en X"
+          title="DISIDENTE en X"
+        ><img src="./x-logo.png" alt="" width="17" height="17"></a>
+      </div>
       <div
         id="terminal-pages"
         class="terminal-line"
