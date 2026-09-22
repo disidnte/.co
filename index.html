@@ -60,6 +60,12 @@
       gap: 2rem;
     }
 
+    .social-links {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
     .site-social {
       display: inline-flex;
       align-items: center;
@@ -171,13 +177,27 @@
     .output-line.is-visible { display: block; }
     .output-line.gap { min-height: 1.35em; }
 
+    .output-line.is-typing::after,
+    .contact-line.is-typing::after {
+      display: inline-block;
+      height: 1em;
+      margin-left: .08em;
+      border-right: 2px solid var(--white);
+      vertical-align: -.14em;
+      content: "";
+      animation: blink-cursor .72s step-end infinite;
+    }
+
     .terminal-return {
       display: none;
       margin-top: 1.35rem;
-      color: var(--muted);
+      color: var(--white);
     }
 
-    .terminal-return.is-complete { display: block; }
+    .terminal-return.is-complete {
+      display: block;
+      cursor: pointer;
+    }
 
     .terminal-return.is-complete::after {
       display: inline-block;
@@ -189,21 +209,65 @@
       animation: blink-cursor .72s step-end infinite;
     }
 
-    .site-footer {
-      display: none;
-      margin-top: auto;
-      padding: 2rem 0 .75rem;
-      border-top: 1px solid #171a18;
-      color: #898d89;
-      font-size: .82rem;
-      letter-spacing: .04em;
+    .terminal-return.has-run::after { display: none; }
+
+    .contact-output {
+      margin-top: 1.35rem;
+      visibility: hidden;
     }
 
-    .site-footer.is-visible {
+    .contact-output.is-visible { visibility: visible; }
+
+    .contact-line {
+      display: none;
+      margin: 0;
+    }
+
+    .contact-line.is-visible { display: block; }
+    .contact-line.gap { min-height: 1.35em; }
+    .contact-email { color: inherit; text-decoration: none; }
+    .contact-email:hover { color: var(--white); }
+
+    .site-footer {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem 2rem;
+      margin-top: auto;
+      padding: 2rem 0 .75rem;
+      color: #898d89;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      visibility: hidden;
+    }
+
+    .site-footer::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background: #171a18;
+      content: "";
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 420ms ease;
+    }
+
+    .site-footer > * {
+      opacity: 0;
+      transform: translateY(.35rem);
+      transition: opacity 320ms ease, transform 320ms ease;
+    }
+
+    .site-footer.is-visible { visibility: visible; }
+    .site-footer.is-visible::before { transform: scaleX(1); }
+
+    .site-footer.is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 220ms;
     }
 
     .footer-status { display: flex; align-items: center; gap: .75rem; }
@@ -219,6 +283,9 @@
         border-right: 0;
         animation: none;
       }
+
+      .site-footer::before,
+      .site-footer > * { transition: none; }
     }
 
     @media (max-width: 640px) {
@@ -241,14 +308,6 @@
           aria-expanded="false"
           aria-label="DISIDENTE. Presiona Enter para escribir el comando."
         ><span class="brand-text">DISIDENTE</span></p>
-        <a
-          class="site-social"
-          href="https://x.com/disidente"
-          target="_blank"
-          rel="noopener noreferrer me"
-          aria-label="DISIDENTE en X"
-          title="DISIDENTE en X"
-        ><img src="./x-logo.png" alt="" width="17" height="17"></a>
       </div>
       <div
         id="terminal-pages"
@@ -260,32 +319,50 @@
       ><span class="terminal-prompt" data-terminal-text="$ "></span><span data-terminal-text="cat introduccion.txt"></span></div>
     </header>
     <section id="introduccion" class="introduction" aria-label="Introducción" aria-hidden="true" aria-live="polite">
-      <p class="output-line" data-output-line>¿En qué momento nos volvimos complacientes ante tanta corrupción?</p>
+      <p class="output-line" data-output-line data-type-line>¿En qué momento nos volvimos complacientes ante tanta corrupción?</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>¿Cuándo dejamos de exigir cuentas</p>
-      <p class="output-line" data-output-line>a quienes administran nuestro dinero,</p>
-      <p class="output-line" data-output-line>nuestras instituciones y nuestro futuro?</p>
+      <p class="output-line" data-output-line data-type-line>¿Cuándo dejamos de exigir cuentas</p>
+      <p class="output-line" data-output-line data-type-line>a quienes administran nuestro dinero,</p>
+      <p class="output-line" data-output-line data-type-line>nuestras instituciones y nuestro futuro?</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>DISIDENTE nace para volver a hacer las preguntas</p>
-      <p class="output-line" data-output-line>que la costumbre, el miedo y la conveniencia</p>
-      <p class="output-line" data-output-line>han silenciado.</p>
+      <p class="output-line" data-output-line data-type-line>¿Por qué los ciudadanos tenemos que pagar la fiesta y los platos rotos?</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>No estamos aquí para decirte qué pensar.</p>
-      <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Estamos aquí para recordar que nada está fuera de duda.</p>
+      <p class="output-line" data-output-line>Buscamos construir un espacio para voces provenientes</p>
+      <p class="output-line" data-output-line>de distintos medios, disciplinas e industrias;</p>
+      <p class="output-line" data-output-line>un lugar donde puedan analizar y cuestionar</p>
+      <p class="output-line" data-output-line>la realidad de México y del mundo con libertad,</p>
+      <p class="output-line" data-output-line>sin que el desacuerdo o la incomodidad</p>
+      <p class="output-line" data-output-line>sean motivo de censura.</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
       <p class="output-line" data-output-line>[fin de introducción]</p>
-      <p id="terminal-return" class="terminal-return" aria-label="Terminal lista">$</p>
+      <p
+        id="terminal-return"
+        class="terminal-return"
+        tabindex="0"
+        role="button"
+        aria-controls="contacto"
+        aria-expanded="false"
+        aria-label="Presiona Enter para mostrar la información de contacto."
+      ><span class="terminal-prompt" data-contact-command="$ "></span><span data-contact-command="cat contacto.txt"></span></p>
+      <div id="contacto" class="contact-output" aria-label="Contacto" aria-hidden="true" aria-live="polite">
+        <p class="contact-line" data-contact-line>¿Te interesa conocer más sobre DISIDENTE</p>
+        <p class="contact-line" data-contact-line>o formar parte del proyecto?</p>
+        <p class="contact-line gap" data-contact-line aria-hidden="true"></p>
+        <p class="contact-line" data-contact-line data-email-line>Escríbenos a <a class="contact-email" href="mailto:info@disidente.com">info@disidente.com</a>.</p>
+      </div>
     </section>
     <footer id="site-footer" class="site-footer" aria-hidden="true">
       <span>© 2026 <a class="footer-home" href="/">DISIDENTE</a>.</span>
-      <span class="footer-status" aria-label="Información del sitio">
-        <a class="footer-link" href="./principios/">Principios</a>
-        <span class="footer-separator" aria-hidden="true">|</span>
-        <span>Transparencia</span>
-        <span class="footer-separator" aria-hidden="true">|</span>
-        <span>Privacidad</span>
-      </span>
+      <nav class="social-links" aria-label="Redes sociales de DISIDENTE">
+        <a
+          class="site-social"
+          href="https://x.com/disidenteg"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="DISIDENTE en X"
+          title="DISIDENTE en X"
+        ><img src="./x-logo.png" alt="" width="17" height="17"></a>
+      </nav>
     </footer>
   </main>
   <script>
@@ -296,11 +373,39 @@
     const introduction = document.querySelector("#introduccion");
     const outputLines = [...introduction.querySelectorAll("[data-output-line]")];
     const terminalReturn = document.querySelector("#terminal-return");
+    const contactCommandSegments = [...terminalReturn.querySelectorAll("[data-contact-command]")];
+    const contactOutput = document.querySelector("#contacto");
+    const contactLines = [...contactOutput.querySelectorAll("[data-contact-line]")];
+    const contactEmailLine = contactOutput.querySelector("[data-email-line]");
+    const contactEmail = contactEmailLine.querySelector(".contact-email");
+    const contactEmailAddress = contactEmail.textContent;
+    const contactEmailHref = contactEmail.getAttribute("href");
     const siteFooter = document.querySelector("#site-footer");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const typedOutputLines = new Map(
+      outputLines
+        .filter((line) => !line.classList.contains("gap"))
+        .map((line) => [line, line.textContent])
+    );
+    const typedContactLines = new Map(
+      contactLines
+        .filter((line) => !line.classList.contains("gap"))
+        .map((line) => [line, line.textContent])
+    );
+
+    if (!reducedMotion.matches) {
+      typedOutputLines.forEach((text, line) => {
+        line.textContent = "";
+      });
+      typedContactLines.forEach((text, line) => {
+        line.textContent = "";
+      });
+    }
+
     let terminalReady = reducedMotion.matches;
     let commandRevealed = false;
     let introductionRevealed = false;
+    let contactRevealed = false;
 
     const armTerminal = () => {
       terminalReady = true;
@@ -350,7 +455,7 @@
 
         entry.segment.textContent += entry.character;
         characterIndex += 1;
-        window.setTimeout(typeNextCharacter, 24);
+        window.setTimeout(typeNextCharacter, 40);
       };
 
       typeNextCharacter();
@@ -368,8 +473,6 @@
       const finishIntroduction = () => {
         introduction.classList.replace("is-running", "is-complete");
         terminalReturn.classList.add("is-complete");
-        siteFooter.setAttribute("aria-hidden", "false");
-        siteFooter.classList.add("is-visible");
       };
 
       if (reducedMotion.matches) {
@@ -387,6 +490,31 @@
         }
 
         line.classList.add("is-visible");
+
+        if (typedOutputLines.has(line)) {
+          const text = typedOutputLines.get(line);
+          let characterIndex = 0;
+          line.classList.add("is-typing");
+
+          const typeNextOutputCharacter = () => {
+            const character = text[characterIndex];
+            if (character === undefined) {
+              line.classList.remove("is-typing");
+              lineIndex += 1;
+              const pauseAfterLine = text.trim().endsWith("?") ? 3000 : 96;
+              window.setTimeout(printNextLine, pauseAfterLine);
+              return;
+            }
+
+            line.textContent += character;
+            characterIndex += 1;
+            window.setTimeout(typeNextOutputCharacter, 30);
+          };
+
+          typeNextOutputCharacter();
+          return;
+        }
+
         lineIndex += 1;
         window.setTimeout(printNextLine, 72);
       };
@@ -394,8 +522,111 @@
       printNextLine();
     };
 
+    const revealContact = () => {
+      if (!terminalReturn.classList.contains("is-complete") || contactRevealed) return;
+
+      contactRevealed = true;
+      terminalReturn.setAttribute("aria-expanded", "true");
+
+      const finishContact = () => {
+        siteFooter.setAttribute("aria-hidden", "false");
+        siteFooter.classList.add("is-visible");
+      };
+
+      const printContact = () => {
+        contactOutput.setAttribute("aria-hidden", "false");
+        contactOutput.classList.add("is-visible");
+
+        if (reducedMotion.matches) {
+          contactLines.forEach((line) => line.classList.add("is-visible"));
+          finishContact();
+          return;
+        }
+
+        let lineIndex = 0;
+        const printNextContactLine = () => {
+          const line = contactLines[lineIndex];
+          if (!line) {
+            finishContact();
+            return;
+          }
+
+          line.classList.add("is-visible");
+
+          if (typedContactLines.has(line)) {
+            const text = typedContactLines.get(line);
+            let characterIndex = 0;
+            line.classList.add("is-typing");
+
+            const typeNextContactCharacter = () => {
+              const character = text[characterIndex];
+              if (character === undefined) {
+                line.classList.remove("is-typing");
+
+                if (line === contactEmailLine) {
+                  line.textContent = "Escríbenos a ";
+                  const emailLink = document.createElement("a");
+                  emailLink.className = "contact-email";
+                  emailLink.href = contactEmailHref;
+                  emailLink.textContent = contactEmailAddress;
+                  line.append(emailLink, ".");
+                }
+
+                lineIndex += 1;
+                const pauseAfterLine = text.trim().endsWith("?") ? 3000 : 96;
+                window.setTimeout(printNextContactLine, pauseAfterLine);
+                return;
+              }
+
+              line.textContent += character;
+              characterIndex += 1;
+              window.setTimeout(typeNextContactCharacter, 30);
+            };
+
+            typeNextContactCharacter();
+            return;
+          }
+
+          lineIndex += 1;
+          window.setTimeout(printNextContactLine, 72);
+        };
+
+        printNextContactLine();
+      };
+
+      if (reducedMotion.matches) {
+        contactCommandSegments.forEach((segment) => {
+          segment.textContent = segment.dataset.contactCommand;
+        });
+        terminalReturn.classList.add("has-run");
+        printContact();
+        return;
+      }
+
+      const queue = contactCommandSegments.flatMap((segment) =>
+        [...segment.dataset.contactCommand].map((character) => ({ segment, character }))
+      );
+      let characterIndex = 0;
+
+      const typeNextCharacter = () => {
+        const entry = queue[characterIndex];
+        if (!entry) {
+          terminalReturn.classList.add("has-run");
+          window.setTimeout(printContact, 160);
+          return;
+        }
+
+        entry.segment.textContent += entry.character;
+        characterIndex += 1;
+        window.setTimeout(typeNextCharacter, 40);
+      };
+
+      typeNextCharacter();
+    };
+
     brand.addEventListener("click", revealCommand);
     commandLine.addEventListener("click", revealIntroduction);
+    terminalReturn.addEventListener("click", revealContact);
 
     document.addEventListener("keydown", (event) => {
       if ((event.ctrlKey || event.metaKey) && ["+", "=", "-", "0"].includes(event.key)) {
@@ -410,6 +641,9 @@
         } else if (!introductionRevealed && commandLine.classList.contains("is-complete")) {
           event.preventDefault();
           revealIntroduction();
+        } else if (!contactRevealed && terminalReturn.classList.contains("is-complete")) {
+          event.preventDefault();
+          revealContact();
         }
       }
     });
