@@ -191,7 +191,7 @@
 
     .terminal-return {
       display: none;
-      margin-top: 1.35rem;
+      margin-top: 0;
       color: var(--white);
     }
 
@@ -567,7 +567,7 @@
                   emailLink.className = "contact-email";
                   emailLink.href = contactEmailHref;
                   emailLink.textContent = contactEmailAddress;
-                  line.append(emailLink, ".");
+                  line.append(emailLink);
                 }
 
                 lineIndex += 1;
