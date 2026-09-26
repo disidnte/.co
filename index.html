@@ -161,7 +161,7 @@
     .terminal-prompt { color: var(--muted); }
 
     .introduction {
-      width: min(100%, 72ch);
+      width: min(100%, 92ch);
       margin-top: 1.5rem;
       visibility: hidden;
     }
@@ -176,6 +176,7 @@
 
     .output-line.is-visible { display: block; }
     .output-line.gap { min-height: 1.35em; }
+    .output-line.closing-question { font-weight: 700; }
 
     .output-line.is-typing::after,
     .contact-line.is-typing::after {
@@ -216,7 +217,10 @@
       visibility: hidden;
     }
 
-    .contact-output.is-visible { visibility: visible; }
+    .contact-output.is-visible {
+      padding-bottom: 3rem;
+      visibility: visible;
+    }
 
     .contact-line {
       display: none;
@@ -319,20 +323,33 @@
       ><span class="terminal-prompt" data-terminal-text="$ "></span><span data-terminal-text="cat introduccion.txt"></span></div>
     </header>
     <section id="introduccion" class="introduction" aria-label="Introducción" aria-hidden="true" aria-live="polite">
-      <p class="output-line" data-output-line data-type-line>¿En qué momento nos volvimos complacientes ante tanta corrupción?</p>
+      <p class="output-line" data-output-line>DISIDENTE nace de una idea sencilla: cuestionar lo establecido también es una forma de participar.</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line data-type-line>¿Cuándo dejamos de exigir cuentas</p>
-      <p class="output-line" data-output-line data-type-line>a quienes administran nuestro dinero,</p>
-      <p class="output-line" data-output-line data-type-line>nuestras instituciones y nuestro futuro?</p>
+      <p class="output-line" data-output-line>No somos un partido político. No aspiramos a convertirnos en uno, ni buscamos decirle a nadie por quién votar. DISIDENTE existe precisamente para conservar algo que con demasiada frecuencia se pierde cuando las ideas se subordinan a partidos, gobiernos o intereses políticos: la libertad de cuestionarlos a todos.</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line data-type-line>¿Por qué los ciudadanos tenemos que pagar la fiesta y los platos rotos?</p>
+      <p class="output-line" data-output-line>Creemos en el individuo y en su derecho a construir su propio camino, tomar sus propias decisiones y disfrutar de aquello que ha conseguido con su trabajo, su tiempo y su dedicación. Las personas no existen al servicio del Estado; el Estado existe al servicio de las personas.</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
-      <p class="output-line" data-output-line>Buscamos construir un espacio para voces provenientes</p>
-      <p class="output-line" data-output-line>de distintos medios, disciplinas e industrias;</p>
-      <p class="output-line" data-output-line>un lugar donde puedan analizar y cuestionar</p>
-      <p class="output-line" data-output-line>la realidad de México y del mundo con libertad,</p>
-      <p class="output-line" data-output-line>sin que el desacuerdo o la incomodidad</p>
-      <p class="output-line" data-output-line>sean motivo de censura.</p>
+      <p class="output-line" data-output-line>Eso exige también cuestionar cuánto Estado necesitamos.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Defendemos instituciones capaces de cumplir sus funciones esenciales, pero conscientes de sus límites. Un Estado eficiente, transparente y responsable no debería medir su éxito por el tamaño de su estructura, sino por su capacidad para cumplir sus obligaciones interfiriendo lo menos posible en la vida de las personas.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>La tecnología nos ofrece una oportunidad extraordinaria para replantear esa estructura. Procesos que antes requerían oficinas, intermediarios, formularios y semanas de espera pueden simplificarse, digitalizarse y, cuando resulte apropiado, automatizarse mediante nuevas tecnologías e inteligencia artificial.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Reducir burocracia no significa renunciar a las instituciones. Significa exigirles más con menos: menos trámites innecesarios, menos estructuras redundantes, menos recursos desperdiciados y más transparencia, accesibilidad y eficiencia.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>También creemos que ninguna organización política debería estar por encima del escrutinio. Los partidos son instrumentos para participar en un sistema democrático; no deberían convertirse en fines en sí mismos ni en estructuras cuya supervivencia tenga prioridad sobre los ciudadanos a los que dicen representar.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>DISIDENTE no pretende sustituir una doctrina por otra.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Pretende abrir un espacio para cuestionarlas.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Aquí podremos coincidir. Podremos discrepar. Podremos cambiar de opinión.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Porque disentir no significa tener siempre la razón.</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line" data-output-line>Significa conservar el derecho a preguntar:</p>
+      <p class="output-line gap" data-output-line aria-hidden="true"></p>
+      <p class="output-line closing-question" data-output-line>¿Por qué tiene que ser así?</p>
       <p class="output-line gap" data-output-line aria-hidden="true"></p>
       <p class="output-line" data-output-line>[fin de introducción]</p>
       <p
@@ -348,7 +365,7 @@
         <p class="contact-line" data-contact-line>¿Te interesa conocer más sobre DISIDENTE</p>
         <p class="contact-line" data-contact-line>o formar parte del proyecto?</p>
         <p class="contact-line gap" data-contact-line aria-hidden="true"></p>
-        <p class="contact-line" data-contact-line data-email-line>Escríbenos a <a class="contact-email" href="mailto:info@disidente.org">info@disidente.org</a>.</p>
+        <p class="contact-line" data-contact-line data-email-line>Escríbenos a <a class="contact-email" href="mailto:info@disidente.org">info@disidente.org</a></p>
       </div>
     </section>
     <footer id="site-footer" class="site-footer" aria-hidden="true">
