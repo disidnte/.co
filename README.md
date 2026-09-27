@@ -8,7 +8,6 @@ GitHub Pages.
 ## Estructura
 
 - `index.html`: landing principal, estilos y comportamiento interactivo.
-- `principios/index.html`: página de Principios.
 - `favicon.ico`, `favicon.svg`, `favicon-32.png` y `apple-touch-icon.png`:
   iconos del sitio.
 - `og-image.png`: imagen para las vistas previas al compartir el enlace.
